@@ -156,12 +156,18 @@ async function createPortalInvite(contact) {
     ? `${crmUrl}/login`
     : `${crmUrl}/client-secure-onboarding/access-setup?token=${rawToken}`;
 
+  // EMAIL SENDING TEMPORARILY DISABLED
+  // Render's free tier blocks outgoing SMTP, causing timeouts.
+  // Clients must be sent their setup URL manually until upgraded to a paid plan.
+  console.log(`Email disabled for ${user.email}. Manual Setup Link: ${setPasswordUrl}`);
+  /*
   await sendPortalInviteEmail({
     to: user.email,
     name: user.name,
     packageName: contact.package?.name || "",
     setPasswordUrl
   });
+  */
 
   return { userId: user._id, setPasswordUrl };
 }
