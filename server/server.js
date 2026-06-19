@@ -156,16 +156,12 @@ async function createPortalInvite(contact) {
     ? `${crmUrl}/login`
     : `${crmUrl}/client-secure-onboarding/access-setup?token=${rawToken}`;
 
-  try {
-    await sendPortalInviteEmail({
-      to: user.email,
-      name: user.name,
-      packageName: contact.package?.name || "",
-      setPasswordUrl
-    });
-  } catch (emailError) {
-    console.error("Non-fatal: Failed to send portal invite email:", emailError.message);
-  }
+  await sendPortalInviteEmail({
+    to: user.email,
+    name: user.name,
+    packageName: contact.package?.name || "",
+    setPasswordUrl
+  });
 
   return { userId: user._id, setPasswordUrl };
 }
