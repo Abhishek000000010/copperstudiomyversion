@@ -1,0 +1,2191 @@
+<!-- Settings - Modern SaaS -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | The Copper Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .copper-focus:focus {
+            outline: none;
+            border-color: #894d0d;
+            box-shadow: 0 0 0 3px rgba(137, 77, 13, 0.15);
+        }
+        /* Custom scrollbar for better aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d8c3b4;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-tint": "#8c4f10",
+                        "inverse-on-surface": "#f0f1f3",
+                        "primary-container": "#a76526",
+                        "on-surface-variant": "#524439",
+                        "secondary-fixed": "#d9e3f4",
+                        "surface-variant": "#e1e2e4",
+                        "background": "#f8f9fb",
+                        "outline": "#857467",
+                        "on-secondary-fixed": "#121c28",
+                        "on-primary-fixed": "#2e1500",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "on-tertiary-fixed": "#141b2b",
+                        "primary-fixed-dim": "#ffb77b",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-secondary-container": "#596372",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "inverse-surface": "#2e3132",
+                        "surface-bright": "#f8f9fb",
+                        "on-tertiary-container": "#fefcff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffdcc2",
+                        "tertiary": "#555c6e",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-dim": "#d9dadc",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f8f9fb",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "outline-variant": "#d8c3b4",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d6e0f1",
+                        "surface-container": "#edeef0",
+                        "primary": "#894d0d",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#6e7487",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "inverse-primary": "#ffb77b",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#555f6d",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "max-width": "1280px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-lg bg-background z-50">
+<div class="px-md mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">The Copper Studio</h1>
+<p class="font-label-md text-label-md text-secondary">Client Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md">Meetings</span>
+</a>
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Billing</span>
+</a>
+</nav>
+<div class="border-t border-outline-variant pt-lg mt-lg">
+<a class="flex items-center gap-3 px-md py-2 transition-colors duration-200 text-secondary hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-md py-2 transition-all text-primary font-bold border-l-2 border-primary bg-secondary-container/10" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-lg flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-1.5 pl-10 pr-4 text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search workspace..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-fixed text-primary font-bold flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile Avatar" class="h-full w-full object-cover" data-alt="A professional headshot of a middle-aged male executive with a warm smile, wearing a tailored charcoal grey blazer over a crisp white shirt. The background is a soft-focus corporate office environment with warm copper-toned wood panels and bright, natural window light. The photography style is sharp, modern, and high-end with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1UPwC5ucmgvFeLgI8GEv0zPKvQsO_hQYjmwrfMVJ2WT2AQskd19fXbx1_yrVKkrQJdbQgBlVyJ7K581-Y9cTUeoED9w7-6kXdHt8yeXLxn9TOZDLKd_qgw7C3stWA_TzfolBpdbc_VS9vtDwk5TWZ28fDh2tdWEcvJsGw9mk2j_plIayVJ1P5rkpYkEn1fMclFlt86vH2ydusj8JnnmqczervXI4kmFdVfrMJyu7BCqA0CWH1gnMngz4OfEEOOFTb1aNJUc0IzUk"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-24 pb-xl px-margin-desktop max-w-5xl mx-auto">
+<!-- Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Settings</h2>
+<p class="text-on-surface-variant mt-1">Manage your account preferences, notifications, and portal experience.</p>
+</div>
+<!-- Tabs -->
+<div class="flex gap-lg border-b border-outline-variant mb-xl overflow-x-auto whitespace-nowrap">
+<button class="pb-3 px-1 border-b-2 border-primary text-primary font-bold transition-all">Account</button>
+<button class="pb-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all">Notifications</button>
+<button class="pb-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all">Security</button>
+<button class="pb-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all">Team Access</button>
+<button class="pb-3 px-1 border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all">Display</button>
+</div>
+<div class="space-y-gutter">
+<!-- Profile Settings Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Profile Settings</h3>
+<div class="flex flex-col md:flex-row gap-xl items-start">
+<div class="flex flex-col items-center gap-md">
+<div class="h-24 w-24 rounded-full border-2 border-outline-variant overflow-hidden">
+<img alt="Arjun Mehta" class="h-full w-full object-cover" data-alt="A detailed portrait of Arjun Mehta, an executive male with sophisticated features, captured in professional studio lighting. He has a short, groomed beard and is dressed in a dark grey business suit. The atmosphere is professional and authoritative, rendered in a crisp, high-resolution style that fits a luxury SaaS portal with soft warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt4LGX_QVuNyzqmVpTd9U_QqKzAOKpZyCvN3JwDszsRk_Z05-UzD3GGPZG8tHR5eq9Q1X0DgHaOAXJ-pG3vsakR8_QfLuhXQFcC0uvAeq4YHp6pKKQ5m0jDPw4TeT7WXUxtCyyLx52TzroU4HlCkTHGP1wiCnt1q8wFRCIGlBjUT1ZGEUG6ONI6pTwGJEsZ9JhI1wLlB8TNisJXbJEbTFD5tUu8runA2cVEUdBBcGYVgwDHGHYvTqSsD7eoiDuUEBGZHtc-Tg2Tlg"/>
+</div>
+<button class="bg-white border border-outline-variant px-md py-1.5 rounded-lg font-label-md text-label-md text-secondary hover:bg-surface-container-low transition-colors shadow-sm">Change</button>
+</div>
+<div class="flex-1 w-full space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Full Name</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus" type="text" value="Arjun Mehta"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Email Address</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus" type="email" value="arjun.mehta@example.com"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Job Title</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus" type="text" value="Client Admin"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Phone Number</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus" type="tel" value="+91 98765 43210"/>
+</div>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-primary hover:bg-primary-container text-white px-xl py-2.5 rounded-lg font-label-md text-label-md transition-all active:scale-95 shadow-md">Save Changes</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Preferences Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Account Preferences</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Language Selector</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus">
+<option>English - US</option>
+<option>English - UK</option>
+<option>Spanish</option>
+<option>French</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Timezone</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-body-md copper-focus">
+<option>(GMT +5:30) Mumbai, New Delhi</option>
+<option>(GMT +0:00) London</option>
+<option>(GMT -5:00) New York</option>
+</select>
+</div>
+</div>
+<div class="mt-xl pt-lg border-t border-outline-variant flex items-center justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Two-factor authentication</p>
+<p class="text-body-sm text-on-surface-variant">Secure your account with an extra layer of security.</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-secondary-container relative transition-colors duration-200" id="tfa-toggle" onclick="toggleSwitch(this)">
+<div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+</section>
+<!-- Notifications Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Notifications</h3>
+<div class="space-y-md">
+<div class="flex items-center justify-between py-2">
+<span class="text-body-md text-on-surface">Email Notifications</span>
+<button class="w-10 h-5 rounded-full bg-primary relative transition-colors duration-200" onclick="toggleSwitch(this)">
+<div class="absolute top-0.5 left-5 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/30">
+<span class="text-body-md text-on-surface">Browser Notifications</span>
+<button class="w-10 h-5 rounded-full bg-secondary-container relative transition-colors duration-200" onclick="toggleSwitch(this)">
+<div class="absolute top-0.5 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/30">
+<span class="text-body-md text-on-surface">Weekly Project Reports</span>
+<button class="w-10 h-5 rounded-full bg-primary relative transition-colors duration-200" onclick="toggleSwitch(this)">
+<div class="absolute top-0.5 left-5 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/30">
+<span class="text-body-md text-on-surface">Meeting Reminders</span>
+<button class="w-10 h-5 rounded-full bg-primary relative transition-colors duration-200" onclick="toggleSwitch(this)">
+<div class="absolute top-0.5 left-5 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/30">
+<span class="text-body-md text-on-surface">Billing Alerts</span>
+<button class="w-10 h-5 rounded-full bg-secondary-container relative transition-colors duration-200" onclick="toggleSwitch(this)">
+<div class="absolute top-0.5 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Security Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Security</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                            Change Password
+                        </button>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-md uppercase tracking-wider">Active Sessions</h4>
+<div class="space-y-md">
+<div class="flex items-center gap-md bg-surface-container-low p-md rounded-lg">
+<div class="bg-white p-2 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-primary" data-icon="desktop_windows">desktop_windows</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-label-md text-label-md text-on-surface">Chrome on macOS</p>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Current</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Mumbai, India • Last active: Just now</p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="border border-error/30 bg-error-container/10 rounded-xl p-lg">
+<h3 class="font-headline-md text-headline-md text-error mb-2">Danger Zone</h3>
+<p class="text-on-surface-variant text-body-sm mb-lg">Once you deactivate your account, all your personal data and project history will be archived. You will lose access to the portal immediately.</p>
+<button class="bg-white border border-error text-error px-md py-2.5 rounded-lg font-label-md text-label-md hover:bg-error hover:text-white transition-all">Deactivate Account</button>
+</section>
+</div>
+<!-- Footer Spacing -->
+<div class="h-12"></div>
+</div>
+</main>
+<script>
+        function toggleSwitch(btn) {
+            const circle = btn.querySelector('div');
+            const isActive = btn.classList.contains('bg-primary');
+            
+            if (isActive) {
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-secondary-container');
+                circle.classList.remove('left-5');
+                circle.classList.add('left-1');
+            } else {
+                btn.classList.remove('bg-secondary-container');
+                btn.classList.add('bg-primary');
+                circle.classList.remove('left-1');
+                circle.classList.add('left-5');
+            }
+        }
+
+        // Search bar micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+            searchInput.parentElement.classList.add('transition-transform');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>
+
+<!-- Billing & Invoices - Modern SaaS -->
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Billing &amp; Invoices | The Copper Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-tertiary-fixed": "#141b2b",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#524439",
+                        "primary-fixed": "#ffdcc2",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "on-secondary-fixed": "#121c28",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-bright": "#f8f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-primary-fixed": "#2e1500",
+                        "surface-variant": "#e1e2e4",
+                        "background": "#f8f9fb",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-container": "#edeef0",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary": "#555c6e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "secondary": "#555f6d",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb77b",
+                        "surface-dim": "#d9dadc",
+                        "primary-container": "#a76526",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#ffb77b",
+                        "surface-container-high": "#e7e8ea",
+                        "secondary-fixed": "#d9e3f4",
+                        "outline-variant": "#d8c3b4",
+                        "surface-tint": "#8c4f10",
+                        "secondary-container": "#d6e0f1",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#6e7487",
+                        "on-background": "#191c1e",
+                        "on-secondary-container": "#596372",
+                        "error-container": "#ffdad6",
+                        "outline": "#857467",
+                        "primary": "#894d0d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "md": "16px",
+                        "margin-desktop": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "max-width": "1280px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .level-2-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+        .primary-gradient-glow {
+            background: radial-gradient(circle at top right, rgba(137, 77, 13, 0.05), transparent);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary/20">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-background flex flex-col py-lg z-50"><div class="p-lg">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">The Copper Studio</h1>
+<p class="text-label-md font-label-md text-secondary opacity-70">SaaS Client Portal</p>
+</div>
+<nav class="flex-1 mt-md px-md">
+<ul class="space-y-xs">
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">timeline</span>
+<span class="text-label-md font-label-md">Project Timeline</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">video_chat</span>
+<span class="text-label-md font-label-md">Meetings</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">Documents</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-primary font-bold bg-surface-container-low border-l-2 border-primary active:opacity-80 active:scale-[0.99] transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-md font-label-md">Billing &amp; Invoices</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md p-md rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-md border-t border-outline-variant">
+<button class="flex items-center gap-md p-md w-full rounded-lg text-secondary hover:text-primary hover:bg-surface-container-highest transition-colors duration-200">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</button>
+</div></aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40"><div class="flex items-center gap-md">
+<button class="md:hidden p-md text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-headline-md font-headline-md font-bold text-primary hidden md:block">Billing &amp; Invoices</h2>
+<h2 class="text-headline-md font-headline-md font-bold text-primary md:hidden">The Copper Studio</h2>
+</div>
+<div class="flex items-center gap-lg">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 relative scale-95 active:scale-95 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center gap-md cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-label-md font-label-md text-on-surface">Arjun Mehta</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Client Admin</p>
+</div>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border border-outline-variant group-hover:border-primary transition-colors duration-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn41Zt2MqdstsPr29klREcjfS-vUD6SaRShwolKyjsXfMfR59DLv0qrvN_49Pq4CfNFHBhtAoDDaxT-ehXiCARjRrV98a6KXIeFTclPB0_awowE3UzfM3-tNRgnbvpl9aWdbNsZOckZp7ZZanNEgqhKk6Cf0ZMtjuVB0yqjjsAUBIHbx1nuHaIlsyvsVn_OOrz0pOCXyoCclmPXsf2q0t6QhXYqWCFqz5ZlgccGvl0nf2YIl2a44hK96cyeuqNt-oMVBOE7VmBzg8">
+</div>
+</div></header>
+<!-- Main Canvas -->
+<main class="md:ml-64 min-h-screen flex flex-col flex-1 p-4 md:p-margin-desktop overflow-x-hidden">
+<!-- Header -->
+<section class="mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg level-2-shadow flex flex-col md:flex-row md:items-center justify-between gap-lg overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="text-headline-lg font-headline-lg text-on-surface mb-2">Billing &amp; Invoices</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">View your package details, payment history and downloadable invoices.</p>
+</div>
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+</div>
+</section>
+<!-- Summary Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-xl">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Current Package</p>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">The Blueprint Suite</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="font-label-md text-label-md text-green-600">Active</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Amount Paid</p>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">₹45,000</h3>
+<p class="mt-4 font-label-md text-label-md text-on-surface-variant">Full settlement completed</p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Payment Status</p>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Paid</h3>
+<div class="mt-4">
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-label-sm font-bold border border-green-200">Verified</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Invoice Count</p>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">1</h3>
+<p class="mt-4 font-label-md text-label-md text-on-surface-variant">Available for download</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- Active Engagement Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant level-2-shadow overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md text-on-surface">Active Engagement</h4>
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+</div>
+<div class="p-lg grid grid-cols-2 gap-lg border-b border-outline-variant">
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase mb-1">Package Name</p>
+<p class="font-body-md font-semibold">The Blueprint Suite</p>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase mb-1">Duration</p>
+<p class="font-body-md font-semibold">4 Weeks</p>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase mb-1">Purchase Date</p>
+<p class="font-body-md font-semibold">June 16, 2026</p>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase mb-1">Status</p>
+<p class="font-body-md font-semibold text-primary">Active Engagement</p>
+</div>
+</div>
+<div class="p-lg bg-surface-container-low/50">
+<p class="font-label-sm text-on-surface-variant uppercase mb-3">Deliverables Included</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-lg text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span> Brand Strategy
+                            </span>
+<span class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-lg text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span> Logo Design
+                            </span>
+<span class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-lg text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span> Typography System
+                            </span>
+<span class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-lg text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span> Brand Guidelines
+                            </span>
+<span class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-lg text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span> Asset Delivery
+                            </span>
+</div>
+<button class="mt-lg w-full md:w-auto bg-primary text-on-primary font-label-md text-label-md py-3 px-8 rounded-lg hover:bg-primary-container transition-all active:scale-95 shadow-lg shadow-primary/10">
+                            View Package Details
+                        </button>
+</div>
+</div>
+<!-- Payment History Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden level-2-shadow" style="transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+<div class="p-lg border-b border-outline-variant">
+<h4 class="font-headline-md text-headline-md text-on-surface">Payment History</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Invoice ID</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Date</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Package</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Amount</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Status</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 font-body-sm font-semibold">INV-001</td>
+<td class="px-lg py-4 font-body-sm text-on-surface-variant">June 16, 2026</td>
+<td class="px-lg py-4 font-body-sm">The Blueprint Suite</td>
+<td class="px-lg py-4 font-body-sm font-bold">₹45,000</td>
+<td class="px-lg py-4">
+<span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">PAID</span>
+</td>
+<td class="px-lg py-4">
+<button class="flex items-center gap-1 text-primary hover:underline font-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Download
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Payment Timeline -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow" style="transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-8">Payment Timeline</h4>
+<div class="relative flex justify-between items-start">
+<div class="absolute top-4 left-0 right-0 h-0.5 bg-outline-variant z-0"></div>
+<!-- Timeline Items -->
+<div class="relative z-10 flex flex-col items-center text-center max-w-[120px]">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-3 border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<p class="font-label-sm font-bold text-on-surface">Package Selected</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-[120px]">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-3 border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<p class="font-label-sm font-bold text-on-surface">Payment Initiated</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-[120px]">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-3 border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<p class="font-label-sm font-bold text-on-surface">Payment Authorized</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-[120px]">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-3 border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<p class="font-label-sm font-bold text-on-surface">Account Activated</p>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-[120px]">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center mb-3 border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill">check</span>
+</div>
+<p class="font-label-sm font-bold text-on-surface">Project Started</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Details & Activity) -->
+<div class="space-y-gutter">
+<!-- Invoice Details Panel -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant level-2-shadow overflow-hidden">
+<div class="p-lg bg-surface-container-low flex justify-between items-center">
+<h4 class="font-label-md font-bold text-on-surface uppercase tracking-tight">Invoice Details</h4>
+<span class="text-on-surface-variant font-label-sm">INV-001</span>
+</div>
+<div class="p-lg space-y-4">
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Issue Date</span>
+<span class="font-body-sm font-semibold">June 16, 2026</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Payment Date</span>
+<span class="font-body-sm font-semibold">June 16, 2026</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Client Name</span>
+<span class="font-body-sm font-semibold">Arjun Mehta</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Package Name</span>
+<span class="font-body-sm font-semibold">The Blueprint Suite</span>
+</div>
+<div class="flex justify-between border-t border-dashed border-outline-variant pt-4">
+<span class="text-on-surface-variant font-body-md font-bold">Total Amount</span>
+<span class="font-body-md font-extrabold text-primary">₹45,000</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Method</span>
+<span class="font-body-sm font-semibold">Bank Transfer</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-body-sm">Status</span>
+<span class="text-green-600 font-bold text-sm">Settled</span>
+</div>
+<div class="pt-6 space-y-3">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-2.5 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="picture_as_pdf">picture_as_pdf</span> Download PDF
+                            </button>
+<button class="w-full border border-outline-variant text-on-surface-variant font-label-md text-label-md py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="print">print</span> Print Invoice
+                            </button>
+</div>
+</div>
+</div>
+<!-- Recent Billing Activity -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant level-2-shadow">
+<h4 class="font-label-md font-bold text-on-surface uppercase tracking-tight mb-6">Recent Activity</h4>
+<ul class="space-y-6 relative before:absolute before:left-2.5 before:top-1 before:bottom-1 before:w-px before:bg-outline-variant">
+<li class="relative pl-8">
+<div class="absolute left-0 top-1 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<p class="font-body-sm font-semibold">Invoice generated</p>
+<p class="font-label-sm text-on-surface-variant">June 16, 2026 • 10:45 AM</p>
+</li>
+<li class="relative pl-8">
+<div class="absolute left-0 top-1 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<p class="font-body-sm font-semibold">Payment received</p>
+<p class="font-label-sm text-on-surface-variant">June 16, 2026 • 11:20 AM</p>
+</li>
+<li class="relative pl-8">
+<div class="absolute left-0 top-1 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<p class="font-body-sm font-semibold">Account activated</p>
+<p class="font-label-sm text-on-surface-variant">June 16, 2026 • 11:30 AM</p>
+</li>
+<li class="relative pl-8">
+<div class="absolute left-0 top-1 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<p class="font-body-sm font-semibold">Package assigned</p>
+<p class="font-label-sm text-on-surface-variant">June 16, 2026 • 12:00 PM</p>
+</li>
+</ul>
+</div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex flex-col items-center gap-2 hover:bg-primary/5 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-center">Invoice</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex flex-col items-center gap-2 hover:bg-primary/5 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="folder_zip">folder_zip</span>
+<span class="font-label-sm text-center">Documents</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex flex-col items-center gap-2 hover:bg-primary/5 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="timeline">timeline</span>
+<span class="font-label-sm text-center">Timeline</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex flex-col items-center gap-2 hover:bg-primary/5 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-center">Support</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for hover effects on cards
+        document.querySelectorAll('.level-2-shadow').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.remove('level-2-shadow');
+                card.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.05)';
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.add('level-2-shadow');
+                card.style.boxShadow = '';
+                card.style.transform = '';
+            });
+        });
+    </script>
+
+
+</body></html>
+
+<!-- Documents & Deliverables - Modern SaaS -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Documents &amp; Deliverables | The Copper Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "outline-variant": "#d8c3b4",
+                        "surface-variant": "#e1e2e4",
+                        "primary-fixed": "#ffdcc2",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "inverse-primary": "#ffb77b",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9dadc",
+                        "primary-fixed-dim": "#ffb77b",
+                        "primary": "#894d0d",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#596372",
+                        "on-background": "#191c1e",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#2e1500",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container": "#edeef0",
+                        "on-tertiary-fixed": "#141b2b",
+                        "background": "#f8f9fb",
+                        "tertiary-container": "#6e7487",
+                        "tertiary": "#555c6e",
+                        "secondary-fixed": "#d9e3f4",
+                        "primary-container": "#a76526",
+                        "outline": "#857467",
+                        "on-tertiary-container": "#fefcff",
+                        "surface": "#f8f9fb",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9fb",
+                        "on-surface-variant": "#524439",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "secondary": "#555f6d",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-container-high": "#e7e8ea",
+                        "on-secondary-fixed": "#121c28",
+                        "on-surface": "#191c1e",
+                        "tertiary-fixed": "#dce2f7",
+                        "secondary-container": "#d6e0f1",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-primary-container": "#fffbff",
+                        "surface-tint": "#8c4f10",
+                        "inverse-surface": "#2e3132",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "max-width": "1280px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f8f9fb; font-family: 'Inter', sans-serif; }
+        .custom-shadow { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); }
+        .copper-button { background-color: #894d0d; color: white; transition: background-color 0.2s; }
+        .copper-button:hover { background-color: #6d3a00; }
+        .secondary-button { background-color: white; border: 1px solid #E5E7EB; color: #4B5563; }
+        .secondary-button:hover { background-color: #F3F4F6; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-tab { border-left: 2px solid #894d0d; background-color: rgba(214, 224, 241, 0.1); color: #894d0d; font-weight: 700; }
+    </style>
+</head>
+<body class="text-on-background">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen py-lg px-md h-full w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface z-50">
+<div class="mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">The Copper Studio</h1>
+<p class="font-label-md text-label-md text-secondary">Client Portal</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-base p-base font-body-md text-body-md text-secondary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-base p-base font-body-md text-body-md text-secondary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">timeline</span>
+                Project Timeline
+            </a>
+<a class="flex items-center gap-base p-base font-body-md text-body-md text-secondary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event</span>
+                Meetings
+            </a>
+<a class="flex items-center gap-base p-base active-tab font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                Documents &amp; Deliverables
+            </a>
+<a class="flex items-center gap-base p-base font-body-md text-body-md text-secondary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                Billing &amp; Invoices
+            </a>
+<a class="flex items-center gap-base p-base font-body-md text-body-md text-secondary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto p-base bg-surface-container-low rounded-lg flex items-center gap-sm">
+<img alt="User" class="w-10 h-10 rounded-full border border-outline-variant" data-alt="A professional headshot of a creative director in a high-end minimalist design studio. He is wearing a crisp white shirt and stylish spectacles. The background is a soft-focus architectural space with warm copper accents and clean white walls, reflecting the sophisticated and professional brand identity of The Copper Studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDJDOaEHR6OhzlxporfYWERik2k8W5ZKqFzc6llf_ts0PNxI-kC0LUPSjqh06HxQcjES5QkVEbZEQHlycCeewQv92sUUys0Fl8eeh4rjXHbeA2T1vsSZAUlBvvVeY3EeyxAGujwy4UKNu94IJmrJqa6yypMQD0EaeDmwajmkYbiZyWONpOWwGiTsaizv7qOIwk2BIZIV7rniIdE6vCOno4cVhvwnMQBvBYvp2-78XM0VvQdVB9daI0BWWhz5kj-LPadzIy7zwivzs"/>
+<div>
+<p class="font-label-md text-label-md font-bold">Alex Sterling</p>
+<p class="text-[10px] text-secondary uppercase tracking-wider">Lead Designer</p>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-256px)] h-16 bg-surface flex justify-between items-center px-margin-desktop z-40 shadow-sm">
+<div class="flex items-center flex-grow max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Search Documents" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg ml-lg">
+<button class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined text-secondary">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-1 rounded-lg transition-colors">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A high-resolution close-up portrait of a female project manager in a brightly lit, modern tech office. She has a confident smile and is wearing professional business casual attire. The lighting is high-key and soft, creating a clean light-mode aesthetic with a palette of whites, light grays, and warm copper highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm-tUCnFUInrHKSVintQ-Uil2VvD23z0XDA1IxxkpSVD5tXfGSi3lrqRsZZ21zjESdTX0tqERIx-tje_abuCOmriIkUqzohnYcnqZE-aDd45BWItRvLo4MCQKjW3rp6_HiRBRVurm4JFlakKmA5FXMekmO-7Vd8utN2LtNGP5c6KxrcMdXtmEF2QJYC3a7RWyNDUvbV7FGWa5mO_wXG1DVr3QA9ZZOHazbLWFnK3TFWmU2WvnBpTd95vlL70KseEEjUran5uNANTE"/>
+<span class="font-label-md text-label-md font-bold">Sarah Chen</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-margin-desktop bg-background min-h-screen">
+<!-- Page Header -->
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Documents &amp; Deliverables</h2>
+<p class="font-body-md text-body-md text-secondary mt-1">Access all project assets, files, deliverables and shared resources.</p>
+</div>
+<div class="flex gap-sm">
+<button class="copper-button font-label-md text-label-md px-lg py-sm rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">upload</span>
+                    Upload New
+                </button>
+</div>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-xl">
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow">
+<p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Total Documents</p>
+<p class="font-headline-md text-headline-md text-on-background">24</p>
+</div>
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow border-l-4 border-l-[#B87333]">
+<p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Pending Review</p>
+<p class="font-headline-md text-headline-md text-primary">3</p>
+</div>
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow">
+<p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Approved Assets</p>
+<p class="font-headline-md text-headline-md text-on-background">12</p>
+</div>
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow">
+<p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Final Deliverables</p>
+<p class="font-headline-md text-headline-md text-on-background">9</p>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Document List Section -->
+<div class="flex-grow space-y-lg">
+<!-- Filter Bar -->
+<div class="flex flex-wrap items-center justify-between gap-md bg-surface p-md rounded-xl border border-outline-variant">
+<div class="flex gap-xs">
+<button class="px-md py-xs rounded-full font-label-md text-label-md bg-primary-container/10 text-primary font-bold">All Files</button>
+<button class="px-md py-xs rounded-full font-label-md text-label-md text-secondary hover:bg-surface-container-low">Pending Review</button>
+<button class="px-md py-xs rounded-full font-label-md text-label-md text-secondary hover:bg-surface-container-low">Approved</button>
+<button class="px-md py-xs rounded-full font-label-md text-label-md text-secondary hover:bg-surface-container-low">Final Delivery</button>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-sm text-label-sm text-secondary">Sort by:</span>
+<select class="bg-transparent font-label-md text-label-md border-none focus:ring-0 cursor-pointer text-on-background font-bold">
+<option>Newest First</option>
+<option>Oldest First</option>
+</select>
+</div>
+</div>
+<!-- Document Grid (Modern File Cards) -->
+<div class="grid grid-cols-1 @xl:grid-cols-2 gap-lg">
+<!-- Card 1 -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow hover:border-primary transition-all group relative overflow-hidden ring-2 ring-primary ring-opacity-10">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-sm bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined text-[32px]">picture_as_pdf</span>
+</div>
+<span class="px-sm py-1 bg-secondary-container/30 text-secondary-fixed-dim text-on-secondary-container font-label-sm text-label-sm rounded-full">Pending Review</span>
+</div>
+<h4 class="font-label-md text-label-md font-bold text-on-background mb-1">Logo Concepts v1.pdf</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-lg">June 18, 2026 • 4.2 MB</p>
+<div class="flex gap-sm">
+<button class="copper-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs flex-grow justify-center">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                Preview
+                            </button>
+<button class="secondary-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow hover:border-primary transition-all group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-sm bg-surface-container-high rounded-lg text-secondary">
+<span class="material-symbols-outlined text-[32px]">picture_as_pdf</span>
+</div>
+<span class="px-sm py-1 bg-on-secondary-container/10 text-on-secondary-container font-label-sm text-label-sm rounded-full">Approved</span>
+</div>
+<h4 class="font-label-md text-label-md font-bold text-on-background mb-1">Moodboard Presentation.pdf</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-lg">June 12, 2026 • 12.8 MB</p>
+<div class="flex gap-sm">
+<button class="copper-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs flex-grow justify-center">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                Preview
+                            </button>
+<button class="secondary-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow hover:border-primary transition-all group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-sm bg-surface-container-high rounded-lg text-secondary">
+<span class="material-symbols-outlined text-[32px]">description</span>
+</div>
+<span class="px-sm py-1 bg-on-secondary-container/10 text-on-secondary-container font-label-sm text-label-sm rounded-full">Approved</span>
+</div>
+<h4 class="font-label-md text-label-md font-bold text-on-background mb-1">Brand Strategy Deck.pdf</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-lg">June 10, 2026 • 2.1 MB</p>
+<div class="flex gap-sm">
+<button class="copper-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs flex-grow justify-center">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                Preview
+                            </button>
+<button class="secondary-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow hover:border-primary transition-all group border-primary/20">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-sm bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[32px]">folder_zip</span>
+</div>
+<span class="px-sm py-1 bg-primary text-white font-label-sm text-label-sm rounded-full">Final Delivery</span>
+</div>
+<h4 class="font-label-md text-label-md font-bold text-on-background mb-1">Final Logo Package.zip</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-lg">July 01, 2026 • 85.4 MB</p>
+<div class="flex gap-sm">
+<button class="copper-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs flex-grow justify-center">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                Preview
+                            </button>
+<button class="secondary-button px-sm py-xs rounded-lg font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Preview & Side Info Column -->
+<aside class="w-full lg:w-96 space-y-lg">
+<!-- Quick Actions Card -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow">
+<h5 class="font-label-md text-label-md font-bold mb-md">Quick Actions</h5>
+<div class="space-y-sm">
+<button class="w-full text-left p-sm rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-base font-body-sm text-body-sm text-on-background border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-primary">cloud_download</span>
+                            Download All Assets
+                        </button>
+<button class="w-full text-left p-sm rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-base font-body-sm text-body-sm text-on-background border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-primary">event_repeat</span>
+                            Schedule Review Meeting
+                        </button>
+<button class="w-full text-left p-sm rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-base font-body-sm text-body-sm text-on-background border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-primary">history</span>
+                            View Timeline
+                        </button>
+</div>
+</div>
+<!-- File Preview Panel -->
+<div class="bg-surface rounded-xl border border-outline-variant custom-shadow overflow-hidden sticky top-lg">
+<div class="aspect-video bg-surface-container-highest relative flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="A macro shot of a metallic logo being engraved into a polished copper plate. The lighting is focused and dramatic, highlighting the fine texture of the metal and the sharp, minimalist lines of the design. The overall mood is one of premium craftsmanship and industrial elegance, aligned with The Copper Studio's high-end tech consulting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8V55M8zs9U-81syq2EQCED2M2mI8rlq5berw-VvMgpGiczTABKRhrRkT4M4O3rNJIG666QK6EbwBq8NK3tP-3uyGGSx7oe38dF9N2VnK0XDKtvyOo2a8moT7o9_7Enidp0MqJ0C1vgQHQ6GM4ZQ8Qt33vvtCXyZ5FnPSvFf85XycKCHK1D3LNeBFPDKpcjuUG1ZscHxeJIitCx6FaH7IA7abxYdHA2LltEK0s9Z_ggQYH6dJ0mgWOKi01wjwKheOdJnfP6R7Qlh4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<span class="absolute bottom-3 left-3 text-white font-label-sm text-label-sm">Preview: v1.0</span>
+</div>
+<div class="p-lg">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-md text-headline-md leading-tight">Logo Concepts v1.pdf</h3>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Initial logo concepts exploring structural strength and minimalist copper motifs.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md mb-lg">
+<div>
+<p class="text-[10px] text-secondary uppercase font-bold">Version</p>
+<p class="font-label-md text-label-md">1.0</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary uppercase font-bold">Upload Date</p>
+<p class="font-label-md text-label-md">June 18, 2026</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary uppercase font-bold">Uploaded By</p>
+<p class="font-label-md text-label-md">Alex Sterling</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary uppercase font-bold">Status</p>
+<span class="text-primary font-bold font-label-md text-label-md">Pending Review</span>
+</div>
+</div>
+<div class="space-y-sm mb-lg">
+<button class="w-full copper-button py-sm rounded-lg font-label-md text-label-md flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                Download File
+                            </button>
+<div class="grid grid-cols-2 gap-sm">
+<button class="secondary-button py-sm rounded-lg font-label-md text-label-md">Approve</button>
+<button class="secondary-button py-sm rounded-lg font-label-md text-label-md">Feedback</button>
+</div>
+</div>
+<!-- Client Feedback -->
+<div class="border-t border-outline-variant pt-lg">
+<h5 class="font-label-md text-label-md font-bold mb-md">Client Feedback</h5>
+<div class="flex gap-sm bg-surface-container-low p-sm rounded-lg">
+<img class="w-8 h-8 rounded-full" data-alt="A portrait of a professional female client providing feedback." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5UGyjJQBU9UXANI92uJmLBsKTXw8LNizZ08kW7JChbwNvOK_f-tDhPevhZJ9o8Rtt5XGEoWe7UmGpjtIW3O-lnqujyCaDH00E-RQPc4yhhKCKvPC8a1EliOrTuW_rnn4qSw-EZXUcMmP082r7xweccET-OBnYeVsiXEPo14-M47cj6sQSpvLu--t0irU7R-hyhPkgtsWQQZZ9sZUrloRySJHnaiDwx8y9S73BMXqNwuO6HLLZ92_eEgookqDticWjIVdap9mY7JM"/>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<p class="font-label-sm text-label-sm font-bold">Sarah Chen</p>
+<p class="text-[10px] text-secondary">2h ago</p>
+</div>
+<p class="font-body-sm text-body-sm text-secondary italic">"Typography looks great. Please explore one more icon variation."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-surface p-lg rounded-xl border border-outline-variant custom-shadow">
+<h5 class="font-label-md text-label-md font-bold mb-md">Recent Activity</h5>
+<div class="space-y-lg relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[1px] before:bg-outline-variant">
+<div class="relative pl-lg">
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[10px] text-white">1</div>
+<p class="font-label-md text-label-md font-bold">Logo concepts uploaded</p>
+<p class="font-label-sm text-label-sm text-secondary">Today, 10:45 AM</p>
+</div>
+<div class="relative pl-lg">
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center text-[10px] text-secondary">2</div>
+<p class="font-label-md text-label-md font-bold">Brand guidelines approved</p>
+<p class="font-label-sm text-label-sm text-secondary">Yesterday</p>
+</div>
+<div class="relative pl-lg">
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center text-[10px] text-secondary">3</div>
+<p class="font-label-md text-label-md font-bold">Feedback submitted</p>
+<p class="font-label-sm text-label-sm text-secondary">2 days ago</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<script>
+        // Micro-interactions for hover states
+        document.querySelectorAll('.bg-surface.p-lg').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if (!card.classList.contains('ring-2')) {
+                    card.style.transform = 'translateY(-2px)';
+                    card.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>
+
+<!-- Meetings - Modern SaaS -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meetings | The Copper Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8f9fb",
+                        "tertiary-container": "#6e7487",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#8c4f10",
+                        "surface-dim": "#d9dadc",
+                        "background": "#f8f9fb",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdcc2",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-surface": "#191c1e",
+                        "on-secondary-container": "#596372",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-container": "#edeef0",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#524439",
+                        "surface-container-high": "#e7e8ea",
+                        "primary-fixed-dim": "#ffb77b",
+                        "primary": "#894d0d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#555c6e",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "on-primary-container": "#fffbff",
+                        "secondary-container": "#d6e0f1",
+                        "outline": "#857467",
+                        "secondary-fixed": "#d9e3f4",
+                        "on-primary-fixed": "#2e1500",
+                        "outline-variant": "#d8c3b4",
+                        "on-tertiary-fixed": "#141b2b",
+                        "surface-container-highest": "#e1e2e4",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "surface-bright": "#f8f9fb",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "secondary": "#555f6d",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e2e4",
+                        "inverse-primary": "#ffb77b",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#121c28",
+                        "primary-container": "#a76526",
+                        "on-tertiary-container": "#fefcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "xl": "32px",
+                        "max-width": "1280px",
+                        "sm": "12px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f8f9fb; }
+        ::-webkit-scrollbar-thumb { background: #d8c3b4; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-md px-base bg-surface border-r border-outline-variant z-50">
+<div class="mb-xl px-md">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">The Copper Studio</h1>
+<p class="text-label-sm text-secondary tracking-wider mt-1 uppercase">SaaS Client Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-md py-3 text-secondary hover:bg-surface-container transition-colors duration-200 font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-md py-3 text-secondary hover:bg-surface-container transition-colors duration-200 font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">timeline</span>
+                Project Timeline
+            </a>
+<a class="flex items-center gap-3 px-md py-3 text-primary font-bold border-l-2 border-primary bg-surface-container-low font-body-md rounded-r-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Meetings
+            </a>
+<a class="flex items-center gap-3 px-md py-3 text-secondary hover:bg-surface-container transition-colors duration-200 font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                Documents
+            </a>
+<a class="flex items-center gap-3 px-md py-3 text-secondary hover:bg-surface-container transition-colors duration-200 font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                Billing &amp; Invoices
+            </a>
+<a class="flex items-center gap-3 px-md py-3 text-secondary hover:bg-surface-container transition-colors duration-200 font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-md pt-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 px-md rounded-lg font-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Project Request
+            </button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 flex justify-between items-center px-gutter bg-surface border-b border-outline-variant z-40">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-2 w-96">
+<span class="material-symbols-outlined text-secondary mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full outline-none" placeholder="Search meetings, notes..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" class="h-full w-full object-cover" data-alt="A professional corporate headshot of a person with a friendly expression, captured with shallow depth of field against a minimalist office background. The lighting is soft and natural, emphasizing a high-end tech consultant aesthetic. The overall color palette is muted with warm tones, reflecting a sophisticated efficiency and premium brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYm-1NrUBEZ_gji2RaQ7uL6h1Pg_d_ckNX4vuw_iRe_f_CmCIwPEhGhFA1HB9bIqqc0vX09Hb660HZX0CgTQVDf_NECrXtPQQZBQcu8PAIQ9-o0qyJ56pi6wOBM02aIPjgPjPNF6cG0TOwf2HVRwXscv6chMD2RYWmnCrCrq8OoHeaorLXxq9cHRb7lt4uV1YXK39t_BNnUypAQM60j8AcJPWw00qLnjY78SjcaQU7PH4JOUctCAyilVPQ9isxcT99SDR0ExF_cWY"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-gutter min-h-screen">
+<div class="max-w-max-width mx-auto">
+<!-- Page Header -->
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Meetings</h2>
+<p class="font-body-md text-secondary">Manage and join your scheduled project sessions.</p>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl custom-shadow hover-lift">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-primary-fixed p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">event_upcoming</span>
+</div>
+<span class="text-label-sm text-secondary font-semibold">Active</span>
+</div>
+<p class="text-label-md text-secondary uppercase tracking-wider">Upcoming Meetings</p>
+<h3 class="font-headline-md text-headline-md mt-1">3</h3>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl custom-shadow hover-lift">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-secondary-container p-3 rounded-lg text-secondary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<span class="text-label-sm text-secondary font-semibold">Historic</span>
+</div>
+<p class="text-label-md text-secondary uppercase tracking-wider">Completed Meetings</p>
+<h3 class="font-headline-md text-headline-md mt-1">8</h3>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl custom-shadow hover-lift">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-error-container p-3 rounded-lg text-error">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-label-sm text-error font-semibold">Attention Required</span>
+</div>
+<p class="text-label-md text-secondary uppercase tracking-wider">Pending Requests</p>
+<h3 class="font-headline-md text-headline-md mt-1">1</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Left Column: Tables and Form -->
+<div class="lg:col-span-2 space-y-xl">
+<!-- Upcoming Meetings Table -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl custom-shadow overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Upcoming Schedule</h3>
+<button class="text-primary font-label-md flex items-center gap-1 hover:underline">
+                                View Calendar <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider">Date &amp; Time</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider">Meeting Type</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider">Duration</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider">Status</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4">
+<div class="font-body-md font-medium">June 20, 2026</div>
+<div class="text-body-sm text-secondary">3:00 PM</div>
+</td>
+<td class="px-lg py-4">
+<span class="font-body-md">Discovery Session</span>
+</td>
+<td class="px-lg py-4 text-body-md text-secondary">60 mins</td>
+<td class="px-lg py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed-variant">
+                                                Scheduled
+                                            </span>
+</td>
+<td class="px-lg py-4">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg text-label-md hover:bg-primary-container transition-all active:scale-95">Join</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group bg-surface-container-low/30">
+<td class="px-lg py-4">
+<div class="font-body-md font-medium">June 28, 2026</div>
+<div class="text-body-sm text-secondary">5:00 PM</div>
+</td>
+<td class="px-lg py-4">
+<span class="font-body-md">Logo Review</span>
+</td>
+<td class="px-lg py-4 text-body-md text-secondary">45 mins</td>
+<td class="px-lg py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-fixed text-on-primary-fixed-variant">
+                                                Scheduled
+                                            </span>
+</td>
+<td class="px-lg py-4">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg text-label-md hover:bg-primary-container transition-all active:scale-95">Join</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Past Meetings Table -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl custom-shadow overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface">Past Meetings</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider w-1/3">Date</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider w-1/2">Meeting Type</th>
+<th class="px-lg py-3 text-label-sm text-secondary font-semibold uppercase tracking-wider text-right">Notes</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 font-body-md">June 15, 2026</td>
+<td class="px-lg py-4 font-body-md">Strategy Review</td>
+<td class="px-lg py-4 text-right">
+<a class="text-primary font-label-md hover:underline inline-flex items-center gap-1" href="#">
+                                                View Notes <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 font-body-md">June 10, 2026</td>
+<td class="px-lg py-4 font-body-md">Discovery Session</td>
+<td class="px-lg py-4 text-right">
+<a class="text-primary font-label-md hover:underline inline-flex items-center gap-1" href="#">
+                                                View Notes <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Request a Meeting Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl custom-shadow overflow-hidden p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Request a Meeting</h3>
+<form class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="col-span-1">
+<label class="block font-label-md text-secondary mb-2">Meeting Type</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg p-2.5 focus:border-primary focus:ring-1 focus:ring-primary/15 outline-none font-body-md">
+<option>Select Type</option>
+<option>Discovery Session</option>
+<option>Design Review</option>
+<option>Technical Sync</option>
+</select>
+</div>
+<div class="col-span-1">
+<label class="block font-label-md text-secondary mb-2">Preferred Date</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2 focus:border-primary focus:ring-1 focus:ring-primary/15 outline-none font-body-md" type="date"/>
+</div>
+<div class="col-span-1">
+<label class="block font-label-md text-secondary mb-2">Preferred Time</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-2 focus:border-primary focus:ring-1 focus:ring-primary/15 outline-none font-body-md" type="time"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-secondary mb-2">Message (Optional)</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-lg p-lg focus:border-primary focus:ring-1 focus:ring-primary/15 outline-none font-body-md resize-none" placeholder="Tell us about the meeting goals..." rows="3"></textarea>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-xl py-3 rounded-lg font-label-md hover:bg-primary-container transition-all hover-lift active:scale-95 shadow-lg" type="submit">
+                                    Request Meeting
+                                </button>
+</div>
+</form>
+</section>
+</div>
+<!-- Right Column: Details & Activity -->
+<div class="lg:col-span-1 space-y-xl">
+<!-- Meeting Details Panel -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl custom-shadow overflow-hidden sticky top-gutter">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface">Logo Review</h3>
+<div class="flex items-center gap-2 mt-1 text-secondary text-body-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                June 28, 5:00 PM (45 mins)
+                            </div>
+</div>
+<div class="p-lg space-y-lg">
+<!-- Meeting Link -->
+<div>
+<label class="block font-label-md text-secondary mb-2">Meeting Link</label>
+<div class="flex items-center gap-2 bg-surface-container rounded-lg p-3">
+<code class="text-body-sm text-primary flex-1 truncate">meet.google.com/xyz-abc-123</code>
+<button class="text-primary p-1 hover:bg-primary/10 rounded transition-colors" title="Copy Link">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Participants -->
+<div>
+<label class="block font-label-md text-secondary mb-3">Participants</label>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant">
+<div class="w-6 h-6 rounded-full bg-primary-fixed text-[10px] flex items-center justify-center font-bold text-primary">JD</div>
+<span class="text-body-sm font-medium">Jane Doe</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant">
+<div class="w-6 h-6 rounded-full bg-secondary-container text-[10px] flex items-center justify-center font-bold text-secondary">MS</div>
+<span class="text-body-sm font-medium">Mark Smith</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant">
+<div class="w-6 h-6 rounded-full bg-primary text-[10px] flex items-center justify-center font-bold text-white">CS</div>
+<span class="text-body-sm font-medium">Copper Studio</span>
+</div>
+</div>
+</div>
+<!-- Agenda -->
+<div>
+<label class="block font-label-md text-secondary mb-3">Agenda</label>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="text-body-md">Review logo concepts</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="text-body-md">Typography discussion</span>
+</li>
+<li class="flex items-start gap-3 text-secondary/70">
+<span class="material-symbols-outlined text-[20px]">radio_button_unchecked</span>
+<span class="text-body-md">Client feedback &amp; Q&amp;A</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">videocam</span>
+                                Join Video Call
+                            </button>
+</div>
+</section>
+<!-- Recent Activity -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl custom-shadow p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Recent Activity</h3>
+<div class="space-y-lg relative">
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant"></div>
+<div class="relative flex gap-lg items-start">
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-primary z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">New meeting scheduled</p>
+<p class="text-body-sm text-secondary">Discovery Session • 2 hours ago</p>
+</div>
+</div>
+<div class="relative flex gap-lg items-start">
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-secondary z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">Meeting notes uploaded</p>
+<p class="text-body-sm text-secondary">Strategy Review • Yesterday</p>
+</div>
+</div>
+<div class="relative flex gap-lg items-start">
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest border-2 border-primary z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">Meeting request approved</p>
+<p class="text-body-sm text-secondary">Logo Review • 2 days ago</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if(btn.textContent.includes('Copy')) {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span>';
+                    setTimeout(() => btn.innerHTML = originalText, 2000);
+                }
+            });
+        });
+    </script>
+</body></html>
+
+<!-- Project Timeline - Modern SaaS -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Timeline | The Copper Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fb;
+        }
+        .copper-glow {
+            box-shadow: 0 0 15px rgba(184, 115, 51, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e2e4",
+                        "secondary-container": "#d6e0f1",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#fefcff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "on-surface-variant": "#524439",
+                        "inverse-primary": "#ffb77b",
+                        "inverse-on-surface": "#f0f1f3",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-secondary-container": "#596372",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "on-primary-fixed": "#2e1500",
+                        "surface-container-high": "#e7e8ea",
+                        "primary-fixed-dim": "#ffb77b",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#121c28",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "surface-tint": "#8c4f10",
+                        "surface-container": "#edeef0",
+                        "primary-fixed": "#ffdcc2",
+                        "on-primary-container": "#fffbff",
+                        "outline": "#857467",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#6e7487",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "outline-variant": "#d8c3b4",
+                        "tertiary": "#555c6e",
+                        "on-tertiary-fixed": "#141b2b",
+                        "primary-container": "#a76526",
+                        "tertiary-fixed": "#dce2f7",
+                        "primary": "#894d0d",
+                        "background": "#f8f9fb",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d9dadc",
+                        "surface-bright": "#f8f9fb",
+                        "secondary-fixed": "#d9e3f4",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e1e2e4",
+                        "secondary": "#555f6d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "max-width": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col z-40 border-r border-outline-variant bg-surface">
+<div class="px-lg py-xl">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">The Copper Studio</h1>
+<p class="text-label-sm text-secondary">SaaS Client Portal</p>
+</div>
+<nav class="flex-1 px-sm space-y-base">
+<!-- Dashboard -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-highest transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Project Timeline (Active) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary bg-surface-container-low border-l-2 border-primary font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">timeline</span>
+<span class="font-label-md text-label-md">Project Timeline</span>
+</a>
+<!-- Meetings -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">video_chat</span>
+<span class="font-label-md text-label-md">Meetings</span>
+</a>
+<!-- Documents -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<!-- Billing -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-label-md text-label-md">Billing &amp; Invoices</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-lg border-t border-outline-variant">
+<button class="flex items-center gap-md w-full text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface shadow-sm z-30 flex items-center justify-between px-margin-desktop">
+<h2 class="text-headline-md font-headline-md text-on-surface">Project Timeline</h2>
+<div class="flex items-center gap-lg">
+<button class="relative p-base text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-md">
+<div class="text-right hidden md:block">
+<p class="text-label-md font-bold text-on-surface">Abhishek</p>
+<p class="text-label-sm text-secondary">Client Lead</p>
+</div>
+<img alt="Abhishek Profile" class="w-10 h-10 rounded-full border border-outline-variant" data-alt="A professional headshot of a modern corporate executive named Abhishek, captured in a clean architectural studio setting with soft natural light. He is wearing a minimalist dark blazer and has a confident, approachable expression. The background is a slightly blurred high-end interior with copper and wood accents, maintaining the premium brand aesthetic of The Copper Studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvvWQK23jsXXAWHv4-diRVupUmBaEzNNlb7xE7dOAoLuueP3L-f5G3iPiIuMyI8rtcn9TXW5BoETmRPTtGSaC1rhaOW5yCNnie2lUB6HguoY0G_ZweTlS8hKMpAA9djFxCNZSCezEIFdk39MCEWhiG1qhyQnVtzvJNKbDhT9wRpb6QURkqE_JA563xj0RYjnFOPxbnM8My3kS1xpPKFmpHb10dLFV2KVy_i9Ttl94PK1ERLvvavhkvXGjpY9XELWe09RNS85FSp_8"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-margin-desktop pb-xl max-w-7xl">
+<!-- Header Section -->
+<div class="mb-xl">
+<h1 class="text-headline-xl font-headline-xl text-primary mb-xs">Project Timeline</h1>
+<p class="text-body-lg text-secondary">Track every phase of your branding engagement.</p>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Column 1: Progress and Detail -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Project Overview Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<h3 class="text-label-sm uppercase tracking-wider text-secondary mb-xs">Current Project</h3>
+<p class="text-headline-md font-headline-md text-on-surface">Monolith Architectural Identity</p>
+</div>
+<div class="text-right">
+<h3 class="text-label-sm uppercase tracking-wider text-secondary mb-xs">Expected Completion</h3>
+<p class="text-body-md font-bold text-primary">July 20, 2026</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<span class="text-body-md font-medium text-on-surface">Current Phase: <span class="text-primary">Logo Development</span></span>
+<span class="text-label-md font-bold text-primary">45%</span>
+</div>
+<div class="w-full h-3 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[45%] rounded-full relative">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Phase Details Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill">token</span>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md">Logo Development</h3>
+<span class="inline-flex items-center px-sm py-xs rounded-full text-xs font-bold bg-primary-container/10 text-primary uppercase">In Progress</span>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-lg border-t border-outline-variant pt-lg">
+<div>
+<h4 class="text-label-md font-bold text-on-surface mb-xs">Admin Notes</h4>
+<p class="text-body-md text-secondary leading-relaxed">
+                                We are currently exploring logo concepts and typography directions. Our team is focusing on the "structural strength" motif identified in the strategy phase.
+                            </p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-md mb-sm">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+<span class="text-body-md">Started: <span class="font-medium">June 15, 2026</span></span>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">history</span>
+<span class="text-body-md">Next Review: <span class="font-medium">June 22, 2026</span></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Vertical Timeline Section -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="text-headline-md mb-xl">Engagement Roadmap</h3>
+<div class="relative space-y-lg ml-4">
+<!-- Connecting Line -->
+<div class="absolute left-[11px] top-4 bottom-4 w-0.5 bg-outline-variant"></div>
+<!-- Stage 1 -->
+<div class="relative flex gap-xl items-start">
+<div class="z-10 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-white text-[14px]" data-weight="fill">check</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-bold text-on-surface">Discovery &amp; Research</h4>
+<span class="text-label-sm text-secondary">June 1, 2026</span>
+</div>
+<p class="text-body-sm text-secondary">Completed stakeholder interviews and competitive audit.</p>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="relative flex gap-xl items-start">
+<div class="z-10 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-white text-[14px]" data-weight="fill">check</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-bold text-on-surface">Brand Strategy</h4>
+<span class="text-label-sm text-secondary">June 5, 2026</span>
+</div>
+<p class="text-body-sm text-secondary">Finalized brand pillars, voice, and positioning statement.</p>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="relative flex gap-xl items-start">
+<div class="z-10 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-white text-[14px]" data-weight="fill">check</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-bold text-on-surface">Moodboarding</h4>
+<span class="text-label-sm text-secondary">June 10, 2026</span>
+</div>
+<p class="text-body-sm text-secondary">Approved visual direction and tonal palette.</p>
+</div>
+</div>
+<!-- Stage 4: Active -->
+<div class="relative flex gap-xl items-start p-md bg-surface rounded-lg -ml-md border border-primary/20 copper-glow">
+<div class="z-10 w-6 h-6 rounded-full bg-primary border-4 border-primary-container/20 flex items-center justify-center ring-4 ring-white">
+<div class="w-2 h-2 bg-white rounded-full animate-ping"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-bold text-primary">Logo Development</h4>
+<span class="text-label-sm text-primary font-bold">June 15, 2026</span>
+</div>
+<p class="text-body-sm text-on-surface">Exploration of primary logomark and custom typography.</p>
+<div class="mt-md flex gap-sm">
+<button class="text-label-sm font-bold text-primary hover:underline">View Drafts</button>
+</div>
+</div>
+</div>
+<!-- Stage 5 -->
+<div class="relative flex gap-xl items-start">
+<div class="z-10 w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant ring-4 ring-white"></div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-medium text-secondary">Brand Guidelines</h4>
+<span class="text-label-sm text-secondary italic">Upcoming</span>
+</div>
+</div>
+</div>
+<!-- Stage 6 -->
+<div class="relative flex gap-xl items-start">
+<div class="z-10 w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant ring-4 ring-white"></div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-xs">
+<h4 class="text-body-lg font-medium text-secondary">Final Delivery</h4>
+<span class="text-label-sm text-secondary italic">Upcoming</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Column 2: Sidebars -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Quick Actions -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="text-label-sm uppercase tracking-wider text-secondary mb-lg">Actions</h3>
+<div class="space-y-sm">
+<button class="w-full flex items-center justify-between px-md py-sm bg-primary text-white rounded-lg hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="font-label-md">View Documents</span>
+<span class="material-symbols-outlined text-[20px]">file_open</span>
+</button>
+<button class="w-full flex items-center justify-between px-md py-sm bg-white border border-outline-variant text-secondary hover:text-primary hover:border-primary transition-all active:scale-[0.98]">
+<span class="font-label-md">Schedule Meeting</span>
+<span class="material-symbols-outlined text-[20px]">event</span>
+</button>
+<button class="w-full flex items-center justify-between px-md py-sm bg-white border border-outline-variant text-secondary hover:text-primary hover:border-primary transition-all active:scale-[0.98]">
+<span class="font-label-md">Contact Team</span>
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</button>
+</div>
+</section>
+<!-- Recent Updates Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="text-label-sm uppercase tracking-wider text-secondary mb-lg">Recent Activity</h3>
+<div class="space-y-lg">
+<div class="flex gap-md">
+<div class="mt-1 w-2 h-2 rounded-full bg-primary"></div>
+<div>
+<p class="text-body-md text-on-surface leading-tight">Logo concepts uploaded</p>
+<p class="text-label-sm text-secondary mt-xs">2 hours ago</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="mt-1 w-2 h-2 rounded-full bg-primary-container"></div>
+<div>
+<p class="text-body-md text-on-surface leading-tight">Timeline updated</p>
+<p class="text-label-sm text-secondary mt-xs">Yesterday</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="mt-1 w-2 h-2 rounded-full bg-primary-container"></div>
+<div>
+<p class="text-body-md text-on-surface leading-tight">Discovery phase approved</p>
+<p class="text-label-sm text-secondary mt-xs">3 days ago</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="mt-1 w-2 h-2 rounded-full bg-primary-container"></div>
+<div>
+<p class="text-body-md text-on-surface leading-tight">Moodboard approved</p>
+<p class="text-label-sm text-secondary mt-xs">June 10, 2026</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Team (Extra Contextual Component) -->
+<section class="bg-primary/5 rounded-xl border border-primary/10 p-lg">
+<h3 class="text-label-sm uppercase tracking-wider text-primary mb-lg">Lead Creatives</h3>
+<div class="flex -space-x-2">
+<img alt="Sarah" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-primary/20" data-alt="A professional headshot of a female creative director with a minimalist, high-end style. She is in a bright studio with copper design elements visible in the background. Her look is sophisticated and modern, fitting the brand aesthetic of The Copper Studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-_dITvfNAsOrId3COHvzIUX7LZkMdZxjCc4awfQ1ZPPMj0I3lpHyBNqNjn6xxLQxHQndDwoIweZXTVxApNaKObJK5iyEW7yRU7yXFInvmZwAVro36CFX35Nyc_4kll41sE8TzD1E4Ck4j1rdNX1ZUkhzdKhEYrMYoN_yrDqknPcBTRLCDjvwgT8BlkZ0aoFQNNF1Smk-bnEPz6QOuO5n3K6ptqNvkbshbBKWC0BvYKRmJSSPp1coMpyjsWexf0vJAfppbKYhWG-g"/>
+<img alt="Marcus" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-primary/20" data-alt="A professional headshot of a male lead designer in a contemporary architectural office. He has a clean, professional appearance with a neutral-colored linen shirt. The atmosphere is artistic and well-lit, reflecting the premium SaaS portal's design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPbSnG-oxhULL-Oo60YFAf73zpZ6tUCRntKBSn4d1LUvrrX-5p51DlQyjy0G-dQQ7eV1Gja5DHXKDfN2AmX5HXgWOGb0KwuKcaQ9U0QE0TgTubnSNTYTdAHDP7fFTAwDt4ccMErUJRakpxA5y7b7V3tqRdvIz5Oxx1JliEyb3SHF041b9IKUEYm0PqxGfnw2EEHF_OTywhY8FihJ61EYl-_ew-CgeMsDIIJvP7h0Hi-_nANXfNaFMgQc_A3SXGxZCkwtJxayOinbc"/>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-primary-container text-white flex items-center justify-center text-label-sm font-bold ring-2 ring-primary/20">
+                            +2
+                        </div>
+</div>
+<p class="text-body-sm text-secondary mt-md">Your dedicated team is currently focusing on Phase 4.</p>
+</section>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (SUPPRESSED based on context: Details Page) -->
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+            });
+            el.addEventListener('mouseup', () => {
+                el.classList.remove('scale-95');
+            });
+            el.addEventListener('mouseleave', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

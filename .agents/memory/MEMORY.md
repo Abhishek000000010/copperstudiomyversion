@@ -1,0 +1,3 @@
+- [Copper Studio architecture](copper-studio-arch.md) — full-stack CRM + client portal; Express port 3000, Vite port 5000, MongoDB 27017/copper-studio
+- [Client portal design system](client-portal-design.md) — copper UI uses Material Symbols Outlined + Inter font; CSS design tokens live in index.css as `--cs-*` vars
+- [Auth middleware](auth-middleware.md) — shared `requireAuth` lives in `server/middleware/auth.js`; old auth.js imported from there now

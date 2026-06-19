@@ -1,0 +1,70 @@
+modules = ["nodejs-20", "web", "python-3.12"]
+[agent]
+expertMode = true
+stack = "BEST_EFFORT_FALLBACK"
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+PORT = "3000"
+NODE_ENV = "development"
+MONGO_URI = "mongodb+srv://rohitzore_db_user:MAwPvTrAY0WLgRCO@thecopperstudio.xj0szqj.mongodb.net/?appName=TheCopperStudio"
+SUPERADMIN_EMAIL = "rohit.zore@datacircles.in"
+SUPERADMIN_NAME = "Super Admin"
+SUPERADMIN_PASSWORD = "RohitZore@18"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Backend API"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Backend API"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash start-backend.sh"
+waitForPort = 3000
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd copper-crm && npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["bash", "-c", "mkdir -p /home/runner/workspace/.mongodb/data && mongod --dbpath /home/runner/workspace/.mongodb/data --logpath /home/runner/workspace/.mongodb/mongod.log --fork --bind_ip 127.0.0.1 2>/dev/null || true && sleep 1 && node server/server.js"]
+build = ["bash", "-c", "cd copper-crm && npm install && npm run build"]

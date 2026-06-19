@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Workspace | The Copper Studio</title>
+    <link rel="stylesheet" href="assets/styles.css?v=admin-1">
+  </head>
+  <body data-page="admin" class="admin-body">
+    <div class="admin-shell">
+      <aside class="admin-sidebar" aria-label="Admin navigation">
+        <a class="admin-brand" href="admin.html">
+          <span class="brand-mark">TCS</span>
+          <strong>The Copper Studio</strong>
+        </a>
+
+        <div class="admin-nav-group">
+          <p>Workspace</p>
+          <button class="admin-nav-item" type="button" data-view="overview">
+            <span class="material-symbols-outlined">dashboard</span> Overview
+          </button>
+        </div>
+
+        <div class="admin-nav-group">
+          <p>Projects</p>
+          <button class="admin-nav-item" type="button" data-view="projects">
+            <span class="material-symbols-outlined">workspaces</span> Active Projects
+          </button>
+          <button class="admin-nav-item" type="button" data-view="kanban">
+            <span class="material-symbols-outlined">view_kanban</span> Kanban Board
+          </button>
+          <button class="admin-nav-item" type="button" data-view="client">
+            <span class="material-symbols-outlined">account_circle</span> Client View
+          </button>
+        </div>
+
+        <div class="admin-nav-group">
+          <p>Finance</p>
+          <button class="admin-nav-item" type="button" data-view="invoice">
+            <span class="material-symbols-outlined">receipt_long</span> Invoice Preview
+          </button>
+        </div>
+
+        <a class="admin-nav-item admin-link" href="index.html">
+          <span class="material-symbols-outlined">storefront</span> Packages
+        </a>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <p class="mini-label">Agency Operating System</p>
+            <h1>Delivery workspace</h1>
+          </div>
+          <label class="admin-search">
+            <span class="material-symbols-outlined">search</span>
+            <input type="search" placeholder="Search projects, clients, tasks">
+          </label>
+          <button class="small-action primary-action" type="button">
+            <span class="material-symbols-outlined">add</span> New Lead
+          </button>
+        </header>
+
+        <div id="adminContent" class="admin-content"></div>
+      </main>
+    </div>
+
+    <script src="assets/app.js?v=admin-1"></script>
+  </body>
+</html>
