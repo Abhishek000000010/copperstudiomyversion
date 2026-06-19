@@ -603,8 +603,8 @@ app.get("/payment", (_req, res) => {
 });
 
 app.use((error, _req, res, _next) => {
-  console.error(error);
-  res.status(error.statusCode || 500).json({ message: error.statusCode ? error.message : "Server error." });
+  console.error("API Error:", error);
+  res.status(error.statusCode || 500).json({ message: error.message || "Server error." });
 });
 
 async function start() {
