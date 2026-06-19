@@ -383,25 +383,32 @@ function renderPaymentPage() {
           button.textContent = "Verifying payment...";
           if (gatewayNote) gatewayNote.textContent = "Verifying payment with Razorpay...";
 
-          const savedOrder = await apiRequest("/razorpay/verify", {
-            method: "POST",
-            body: JSON.stringify({
-              ...response,
-              selectedPackageId: order.selectedPackageId,
-              couponCode: order.coupon?.code || "",
-              customer: order.customer,
-              verified: order.verified
-            })
-          });
+          try {
+            const savedOrder = await apiRequest("/razorpay/verify", {
+              method: "POST",
+              body: JSON.stringify({
+                ...response,
+                selectedPackageId: order.selectedPackageId,
+                couponCode: order.coupon?.code || "",
+                customer: order.customer,
+                verified: order.verified
+              })
+            });
 
-          order.paymentStatus = "paid";
-          order.paidAt = savedOrder.payment.paidAt;
-          order.invoiceId = savedOrder.payment.invoiceId;
-          order.razorpayOrderId = savedOrder.payment.razorpayOrderId;
-          order.razorpayPaymentId = savedOrder.payment.razorpayPaymentId;
-          order.mongoOrderId = savedOrder._id;
-          saveOrder(order);
-          window.location.href = "success.html";
+            order.paymentStatus = "paid";
+            order.paidAt = savedOrder.payment.paidAt;
+            order.invoiceId = savedOrder.payment.invoiceId;
+            order.razorpayOrderId = savedOrder.payment.razorpayOrderId;
+            order.razorpayPaymentId = savedOrder.payment.razorpayPaymentId;
+            order.mongoOrderId = savedOrder._id;
+            saveOrder(order);
+            window.location.href = "success.html";
+          } catch (err) {
+            button.disabled = false;
+            button.innerHTML = 'Pay Securely <span class="material-symbols-outlined">arrow_forward</span>';
+            if (gatewayNote) gatewayNote.textContent = "Verification failed: " + err.message;
+            alert("Payment verification failed: " + err.message);
+          }
         },
         modal: {
           ondismiss: () => {
