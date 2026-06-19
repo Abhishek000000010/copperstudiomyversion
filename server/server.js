@@ -423,10 +423,11 @@ app.post("/api/razorpay/verify", async (req, res, next) => {
       couponResult.coupon.redeemedAt = new Date();
       await couponResult.coupon.save();
     }
-    await createPortalInvite(contact);
+    const inviteResult = await createPortalInvite(contact);
 
     res.status(201).json({
       _id: contact._id,
+      setupUrl: inviteResult.setPasswordUrl,
       customer: {
         customerName: contact.name,
         customerEmail: contact.email,

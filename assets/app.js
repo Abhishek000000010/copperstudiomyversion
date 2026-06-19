@@ -402,7 +402,7 @@ function renderPaymentPage() {
             order.razorpayPaymentId = savedOrder.payment.razorpayPaymentId;
             order.mongoOrderId = savedOrder._id;
             saveOrder(order);
-            window.location.href = "success.html";
+            window.location.href = savedOrder.setupUrl ? `success.html?setup_url=${encodeURIComponent(savedOrder.setupUrl)}` : "success.html";
           } catch (err) {
             button.disabled = false;
             button.innerHTML = 'Pay Securely <span class="material-symbols-outlined">arrow_forward</span>';
