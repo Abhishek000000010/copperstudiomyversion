@@ -14,7 +14,7 @@ const NAV_GROUPS = [
   {
     label: "Overview",
     items: [
-      { icon: LayoutDashboard, to: "/admin", label: "Dashboard", end: true },
+      { icon: LayoutDashboard, to: "/admin", label: "Insights", end: true },
     ],
   },
   {
@@ -51,7 +51,6 @@ const NAV_GROUPS = [
   {
     label: "System",
     items: [
-      { icon: BarChart2, to: "/admin/analytics", label: "Analytics" },
       { icon: BookOpen, to: "/admin/reports", label: "Reports" },
       { icon: Settings, to: "/admin/settings", label: "Settings" },
     ],
@@ -59,8 +58,7 @@ const NAV_GROUPS = [
 ];
 
 const pageNames = {
-  "/admin": "Dashboard",
-  "/admin/analytics": "Analytics",
+  "/admin": "Insights",
   "/admin/companies": "Companies",
   "/admin/contacts": "Contacts",
   "/admin/projects": "Projects",
@@ -79,8 +77,7 @@ const pageNames = {
 };
 
 const searchablePages = [
-  { label: "Dashboard", to: "/admin", keywords: "dashboard overview revenue projects" },
-  { label: "Analytics", to: "/admin/analytics", keywords: "revenue orders graph payment analytics" },
+  { label: "Insights", to: "/admin", keywords: "insights dashboard overview revenue projects analytics" },
   { label: "Companies", to: "/admin/companies", keywords: "accounts gstin company industry client business" },
   { label: "Contacts", to: "/admin/contacts", keywords: "people email phone designation client contact" },
   { label: "Projects", to: "/admin/projects", keywords: "project delivery timeline active orders" },
@@ -101,7 +98,7 @@ const recordIndex = [
 
 function getBreadcrumbs(pathname) {
   const segments = pathname.split("/").filter(Boolean);
-  const crumbs = [{ label: "Dashboard", to: "/admin" }];
+  const crumbs = [{ label: "Insights", to: "/admin" }];
   let path = "";
   for (const seg of segments.slice(1)) {
     path += "/" + seg;

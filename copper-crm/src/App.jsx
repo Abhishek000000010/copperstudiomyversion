@@ -5,7 +5,7 @@ import { AuthProvider } from "./auth/AuthContext";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { ToastProvider } from "./components/ToastProvider";
 
-import Dashboard from "./pages/Dashboard";
+
 import Companies from "./pages/crm/Companies";
 import CompanyDetail from "./pages/crm/CompanyDetail";
 import Contacts from "./pages/crm/Contacts";
@@ -57,8 +57,7 @@ export default function App() {
           {/* Admin */}
           <Route element={<ProtectedRoute role="superadmin" />}>
             <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="analytics" element={<AnalyticsPage />} />
+              <Route index element={<AnalyticsPage />} />
               <Route path="companies" element={<Companies />} />
               <Route path="companies/:companyId" element={<CompanyDetail />} />
               <Route path="companies/:companyId/projects/:projectId" element={<LegacyProjectRedirect />} />

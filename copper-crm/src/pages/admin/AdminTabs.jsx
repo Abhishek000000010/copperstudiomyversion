@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   BarChart3, CalendarDays, Clock3, Copy, FileDown, FileText,
   PackageCheck, PieChart, Plus, ReceiptText, Send,
@@ -9,9 +9,9 @@ import {
   Pie, PieChart as RePieChart, ResponsiveContainer, Tooltip, XAxis, YAxis
 } from "recharts";
 import { Button } from "../../components/ui";
-import { coupons, dailyRevenue, orders, projects } from "../../data/mockData";
-import { useToast } from "../../components/useToast";
 import { useCrmRecords } from "../../hooks/useCrmRecords";
+import { useAuth } from "../../auth/useAuth";
+import { adminApi } from "../../lib/clientApi";
 
 function Card({ children, className = "" }) {
   return <section className={`rounded-xl border border-gray-200 bg-[#f0ede4] shadow-sm shadow-gray-100/60 ${className}`}>{children}</section>;
@@ -80,17 +80,7 @@ function DateTimeField({ label, value, onChange }) {
   );
 }
 
-const statusData = [
-  { name: "On time", value: 71, color: "#10b981" },
-  { name: "Delayed", value: 18, color: "#f59e0b" },
-  { name: "At risk", value: 11, color: "#ef4444" },
-];
 
-const packageRevenue = [
-  { name: "Starter", revenue: 29499, tier: 9 },
-  { name: "Growth", revenue: 176997, tier: 14 },
-  { name: "Enterprise", revenue: 212398, tier: 8 },
-];
 
 function toDateTimeLocal(date = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)) {
   const zoned = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
@@ -114,25 +104,104 @@ function safeFileName(value) {
 
 export function AnalyticsPage() {
   const [timeFilter, setTimeFilter] = useState("Last 30 days");
-  const revenue = 298520;
-  const paidOrders = orders.filter((order) => order.status === "Paid").length;
-  const paymentRate = Math.round((paidOrders / orders.length) * 100);
-  const avgProjectValue = Math.round(revenue / projects.length);
+  const auth = useAuth();
+  const { records: contacts } = useCrmRecords("contacts", []);
+  const [projects, setProjects] = useState([]);
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    if (auth.token) {
+      adminApi.getProjects(auth.token).then(setProjects).catch(() => {});
+      adminApi.getClients(auth.token).then(setClients).catch(() => {});
+    }
+  }, [auth.token]);
+
+  const metricsData = useMemo(() => {
+    let revenue = 0;
+    let paidOrders = 0;
+    const totalOrders = contacts.length;
+    
+    const packageStats = {};
+    const dailyStats = {};
+
+    contacts.forEach((c) => {
+      const isPaid = c.payment?.status === "paid" || c.payment?.status === "captured" || c.payment?.status === "success";
+      const val = Number(c.package?.total || c.package?.price || 0);
+      const pkgName = c.package?.name || "Custom";
+
+      if (isPaid) {
+        paidOrders++;
+        revenue += val;
+
+        if (!packageStats[pkgName]) packageStats[pkgName] = { name: pkgName, revenue: 0, tier: 0 };
+        packageStats[pkgName].revenue += val;
+        packageStats[pkgName].tier += 1;
+
+        if (c.createdAt) {
+          const date = new Date(c.createdAt);
+          const dayString = date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+          if (!dailyStats[dayString]) dailyStats[dayString] = { day: dayString, revenue: 0 };
+          dailyStats[dayString].revenue += val;
+        }
+      }
+    });
+
+    const dynamicPackageRevenue = Object.values(packageStats).sort((a, b) => b.revenue - a.revenue);
+    const dynamicDailyRevenue = Object.values(dailyStats);
+
+    const paymentRate = totalOrders > 0 ? Math.round((paidOrders / totalOrders) * 100) : 0;
+    const avgProjectValue = projects.length > 0 ? Math.round(revenue / projects.length) : 0;
+
+    let delayed = 0;
+    let onTime = 0;
+    const today = new Date();
+    projects.forEach((p) => {
+      if (!p.dueDate) {
+        onTime++;
+        return;
+      }
+      const due = new Date(p.dueDate);
+      const daysLeft = Math.ceil((due - today) / 86400000);
+      if (daysLeft < 0 && p.progress < 100) {
+        delayed++;
+      } else {
+        onTime++;
+      }
+    });
+    const onTimePercent = projects.length > 0 ? Math.round((onTime / projects.length) * 100) : 100;
+
+    return {
+      revenue,
+      paidOrders,
+      paymentRate,
+      avgProjectValue,
+      newClients: clients.length,
+      onTimePercent,
+      delayedCount: delayed,
+      dynamicPackageRevenue,
+      dynamicDailyRevenue
+    };
+  }, [contacts, projects, clients]);
 
   const metrics = [
-    ["Total revenue", `Rs ${revenue.toLocaleString("en-IN")}`, WalletCards],
+    ["Total revenue", `Rs ${metricsData.revenue.toLocaleString("en-IN")}`, WalletCards],
     ["Total projects", projects.length, PackageCheck],
-    ["Avg project value", `Rs ${avgProjectValue.toLocaleString("en-IN")}`, TrendingUp],
-    ["New clients", 12, Users],
-    ["Payment rate", `${paymentRate}%`, ReceiptText],
+    ["Avg project value", `Rs ${metricsData.avgProjectValue.toLocaleString("en-IN")}`, TrendingUp],
+    ["New clients", metricsData.newClients, Users],
+    ["Payment rate", `${metricsData.paymentRate}%`, ReceiptText],
     ["Avg completion", "18 days", BarChart3],
-    ["On-time", "71%", PieChart],
-    ["Delayed", 3, FileText],
+    ["On-time", `${metricsData.onTimePercent}%`, PieChart],
+    ["Delayed", metricsData.delayedCount, FileText],
+  ];
+
+  const dynamicStatusData = [
+    { name: "On time", value: metricsData.onTimePercent, color: "#10b981" },
+    { name: "Delayed", value: 100 - metricsData.onTimePercent, color: "#f59e0b" },
   ];
 
   return (
     <PageShell
-      title="Analytics"
+      title="Insights"
       subtitle="Revenue, projects, payments, package tiers, product performance, and delivery health."
       action={
         <select value={timeFilter} onChange={(event) => setTimeFilter(event.target.value)} className="h-10 rounded-xl border border-gray-200 bg-[#f0ede4] px-3 text-xs font-bold text-gray-600 outline-none">
@@ -158,13 +227,12 @@ export function AnalyticsPage() {
           </div>
           <div className="h-80 p-4">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={dailyRevenue.slice(-45)}>
+              <LineChart data={metricsData.dynamicDailyRevenue}>
                 <CartesianGrid vertical={false} stroke="#eef2f7" />
                 <XAxis dataKey="day" hide />
                 <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
                 <Tooltip />
                 <Line dataKey="revenue" stroke="#2563EB" strokeWidth={2} dot={false} />
-                <Line dataKey="trend" stroke="#10b981" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -177,15 +245,15 @@ export function AnalyticsPage() {
           <div className="h-64 p-4">
             <ResponsiveContainer width="100%" height="100%">
               <RePieChart>
-                <Pie data={statusData} dataKey="value" innerRadius={54} outerRadius={86} paddingAngle={4}>
-                  {statusData.map((item) => <Cell key={item.name} fill={item.color} />)}
+                <Pie data={dynamicStatusData} dataKey="value" innerRadius={54} outerRadius={86} paddingAngle={4}>
+                  {dynamicStatusData.map((item) => <Cell key={item.name} fill={item.color} />)}
                 </Pie>
                 <Tooltip />
               </RePieChart>
             </ResponsiveContainer>
           </div>
-          <div className="grid grid-cols-3 gap-2 px-4 pb-4">
-            {statusData.map((item) => (
+          <div className="grid grid-cols-2 gap-2 px-4 pb-4">
+            {dynamicStatusData.map((item) => (
               <div key={item.name} className="rounded-xl bg-gray-50 p-3">
                 <span className="block h-2 w-2 rounded-full" style={{ background: item.color }} />
                 <p className="mt-2 text-xs font-bold text-gray-700">{item.name}</p>
@@ -201,7 +269,7 @@ export function AnalyticsPage() {
               <h3 className="text-sm font-bold text-gray-950">Top products by revenue</h3>
               <div className="mt-4 h-64">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={packageRevenue}>
+                  <BarChart data={metricsData.dynamicPackageRevenue}>
                     <CartesianGrid vertical={false} stroke="#eef2f7" />
                     <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#6b7280" }} />
                     <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
@@ -214,7 +282,7 @@ export function AnalyticsPage() {
             <div>
               <h3 className="text-sm font-bold text-gray-950">Total tier under package</h3>
               <div className="mt-4 space-y-3">
-                {packageRevenue.map((item) => (
+                {metricsData.dynamicPackageRevenue.map((item) => (
                   <div key={item.name} className="rounded-xl border border-gray-200 bg-gray-50 p-3">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-bold text-gray-900">{item.name}</p>
@@ -223,6 +291,9 @@ export function AnalyticsPage() {
                     <p className="mt-1 text-xs text-gray-500">Rs {item.revenue.toLocaleString("en-IN")} revenue</p>
                   </div>
                 ))}
+                {metricsData.dynamicPackageRevenue.length === 0 && (
+                  <div className="text-sm text-gray-500 italic p-4 text-center">No package revenue yet</div>
+                )}
               </div>
             </div>
           </div>
