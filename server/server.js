@@ -601,6 +601,20 @@ app.get("/checkout", (_req, res) => {
 app.get("/payment", (_req, res) => {
   res.sendFile(path.join(siteRoot, "payment.html"));
 });
+app.get("/api/test-email", async (req, res, next) => {
+  try {
+    const { sendPortalInviteEmail } = await import("./services/email.js");
+    const result = await sendPortalInviteEmail({
+      to: "abhishekjadhav0078@gmail.com",
+      name: "Test User",
+      packageName: "Test Package",
+      setPasswordUrl: "http://localhost:5173"
+    });
+    res.json({ success: true, result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message, stack: err.stack });
+  }
+});
 
 app.use((error, _req, res, _next) => {
   console.error("API Error:", error);
