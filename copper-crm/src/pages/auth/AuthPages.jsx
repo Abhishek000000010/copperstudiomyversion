@@ -116,10 +116,10 @@ function SubmitButton({ children, loading }) {
     <button
       type="submit"
       disabled={loading}
-      className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#331405] px-4 py-3 text-sm font-bold text-[#f0ede4] shadow-lg shadow-[#331405]/20 transition-colors hover:bg-[#6f381a] disabled:cursor-not-allowed disabled:opacity-60"
+      className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#331405] px-4 py-3 text-sm font-bold text-[#f0ede4] shadow-lg shadow-[#331405]/20 transition-colors hover:bg-[#6f381a] disabled:cursor-not-allowed disabled:opacity-80"
     >
-      {children}
-      <ArrowRight size={16} />
+      {loading ? "Waking up server (can take 60s)..." : children}
+      {!loading && <ArrowRight size={16} />}
     </button>
   );
 }
